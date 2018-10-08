@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build . -t arcade:postgres-dvdrental
+docker build . -t robfrank:postgres-dvdrental
