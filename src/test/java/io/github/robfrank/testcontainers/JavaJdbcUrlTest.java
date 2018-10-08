@@ -1,6 +1,7 @@
 package io.github.robfrank.testcontainers;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +22,7 @@ public class JavaJdbcUrlTest {
                 "  n INT\n" +
                 ");");
     }
-    
+
     @Test
     public void shouldSelectFromBar() throws SQLException {
         String jdbcUrl = "jdbc:tc:postgresql:9.6.8://hostname/databasename?&TC_INITFUNCTION=io.github.robfrank.testcontainers.JavaJdbcUrlTest::sampleInitFunction";

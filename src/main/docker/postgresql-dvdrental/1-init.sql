@@ -1,0 +1,2 @@
+CREATE DATABASE dvdrental;
+GRANT ALL PRIVILEGES ON DATABASE dvdrental TO postgres;

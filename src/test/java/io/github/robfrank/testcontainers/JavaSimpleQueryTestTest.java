@@ -1,7 +1,8 @@
 package io.github.robfrank.testcontainers;
 
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.sql.Connection;
@@ -14,9 +15,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class JavaSimpleQueryTestTest {
 
-    @ClassRule
     public static PostgreSQLContainer container =
             new PostgreSQLContainer("postgres:9.6.9");
+
+    @BeforeAll
+    static void beforeAll() {
+        container.start();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        container.stop();
+    }
 
     @Test
     public void shouldTestSimpleQuery() throws SQLException {
