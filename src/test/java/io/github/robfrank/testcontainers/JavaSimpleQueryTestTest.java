@@ -30,10 +30,8 @@ public class JavaSimpleQueryTestTest {
     }
 
     @Test
-    @ParameterizedTest
     public void shouldTestSimpleQuery() throws SQLException {
 
-        System.out.println("container.getJdbcUrl() = " + container.getJdbcUrl());
         Connection conn = DriverManager.getConnection(container.getJdbcUrl(), container.getUsername(), container.getPassword());
         Statement stmt = conn.createStatement();
         stmt.execute("SELECT 1");
