@@ -23,17 +23,13 @@ class KotlinFromDockerFileTest {
     ).apply {
         withExposedPorts(80)
         waitingFor(Wait.forListeningPort())
-
         start()
-
         followOutput(Slf4jLogConsumer(log))
-
     }
 
 
     @Test
-    fun `should perform simple query`() {
-
+    fun `should get 200 OK`() {
         Assertions.assertThat(container.isRunning).isTrue()
 
         val url = URL("http://${container.containerIpAddress}:${container.firstMappedPort}")
