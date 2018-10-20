@@ -14,6 +14,14 @@ node {
         }
     }
 
+    stage('build support images') {
+        ansiColor('xterm') {
+            sh "cd ./src/main/docker/orientdb && ./build.sh && cd -"
+            sh "cd ./src/main/docker/postgresql-dvdrental && ./build.sh && cd -"
+        }
+    }
+
+
     stage('build') {
         try {
             ansiColor('xterm') {
