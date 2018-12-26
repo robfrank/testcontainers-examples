@@ -3,6 +3,13 @@ service: docker
 notifications:
   email:
     - ro.franchini@gmail.com
+
+before_install:
+  - docker version
+  - docker info
+  - cd ./src/main/docker/orientdb && ./build.sh && cd -
+  - cd ./src/main/docker/postgresql-dvdrental && ./build.sh && cd -
+
 jdk:
   - openjdk8
   - openjdk9
