@@ -1,10 +1,9 @@
 package io.github.robfrank.testcontainers;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,25 +13,21 @@ import java.sql.Statement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Testcontainers
 public class JavaSimpleQueryTestTest {
 
+    @Container
     public static PostgreSQLContainer container =
             new PostgreSQLContainer("postgres:9.6.9");
 
-    @BeforeAll
-    static void beforeAll() {
-        container.start();
-    }
-
-    @AfterAll
-    static void afterAll() {
-        container.stop();
-    }
 
     @Test
     public void shouldTestSimpleQuery() throws SQLException {
 
-        Connection conn = DriverManager.getConnection(container.getJdbcUrl(), container.getUsername(), container.getPassword());
+        Connection conn = DriverManager.getConnection(container.getJdbcUrl(),
+                container.getUsername(),
+                container.getPassword());
+
         Statement stmt = conn.createStatement();
         stmt.execute("SELECT 1");
 

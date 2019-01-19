@@ -23,7 +23,7 @@
         <assertj-core.version>3.11.1</assertj-core.version>
         <assertj-guava.version>3.2.1</assertj-guava.version>
 
-        <testcontainers.version>1.10.4</testcontainers.version>
+        <testcontainers.version>1.10.5</testcontainers.version>
         <postgresql.version>42.2.5</postgresql.version>
         <selenium-remote-driver.version>3.141.59</selenium-remote-driver.version>
         <orientdb-client.version>3.0.8</orientdb-client.version>
@@ -149,6 +149,12 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>
