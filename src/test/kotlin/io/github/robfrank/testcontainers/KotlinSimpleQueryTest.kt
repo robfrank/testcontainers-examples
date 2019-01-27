@@ -3,14 +3,16 @@ package io.github.robfrank.testcontainers
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.sql.DriverManager
 
+@Testcontainers
 class KotlinSimpleQuerySpec {
 
-    private val container: PostgreSQLContainer<Nothing> = PostgreSQLContainer<Nothing>()
-            .apply {
-                start()
-            }
+    @Container
+    private val container = PostgreSQLContainer<Nothing>()
+
 
     @Test
     fun `should perform simple query`() {
