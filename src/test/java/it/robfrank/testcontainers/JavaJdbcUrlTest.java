@@ -25,7 +25,7 @@ public class JavaJdbcUrlTest {
 
     @Test
     public void shouldSelectFromBar() throws SQLException {
-        String jdbcUrl = "jdbc:tc:postgresql:9.6.8://hostname/databasename?&TC_INITFUNCTION=io.github.robfrank.testcontainers.JavaJdbcUrlTest::sampleInitFunction";
+        String jdbcUrl = "jdbc:tc:postgresql:9.6.8://hostname/databasename?&TC_INITFUNCTION=it.robfrank.testcontainers.JavaJdbcUrlTest::sampleInitFunction";
 
         Connection conn = DriverManager.getConnection(jdbcUrl);
 
