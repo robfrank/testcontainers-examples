@@ -27,7 +27,7 @@ public class JavaJdbcUrlParametrizedTest {
     @ParameterizedTest(name = "PGSQL version:: {arguments}")
     @ValueSource(strings = {"9.6.6", "9.6.7", "9.6.8"})
     public void shouldSelectFromBar(String version) throws SQLException {
-        String jdbcUrl = "jdbc:tc:postgresql:" + version + "://hostname/databasename?&TC_INITFUNCTION=io.github.robfrank.testcontainers.JavaJdbcUrlTest::sampleInitFunction";
+        String jdbcUrl = "jdbc:tc:postgresql:" + version + "://hostname/databasename?&TC_INITFUNCTION=it.robfrank.testcontainers.JavaJdbcUrlTest::sampleInitFunction";
 
         Connection conn = DriverManager.getConnection(jdbcUrl);
 
