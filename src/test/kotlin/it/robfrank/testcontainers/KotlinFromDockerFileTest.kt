@@ -1,4 +1,4 @@
-package io.github.robfrank.testcontainers
+package it.robfrank.testcontainers
 
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test

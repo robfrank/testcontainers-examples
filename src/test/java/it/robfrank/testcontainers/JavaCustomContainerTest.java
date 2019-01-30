@@ -1,4 +1,4 @@
-package io.github.robfrank.testcontainers;
+package it.robfrank.testcontainers;
 
 import com.orientechnologies.orient.client.remote.OServerAdmin;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;

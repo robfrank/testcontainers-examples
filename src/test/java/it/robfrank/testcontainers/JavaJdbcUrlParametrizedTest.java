@@ -1,4 +1,4 @@
-package io.github.robfrank.testcontainers;
+package it.robfrank.testcontainers;
 
 
 import org.junit.jupiter.params.ParameterizedTest;

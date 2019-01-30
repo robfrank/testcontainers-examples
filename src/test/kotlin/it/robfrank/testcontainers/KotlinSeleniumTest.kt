@@ -1,10 +1,8 @@
-package io.github.robfrank.testcontainers
+package it.robfrank.testcontainers
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.jupiter.api.TestInstance
-import org.openqa.selenium.Capabilities
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL
