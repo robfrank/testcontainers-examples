@@ -41,7 +41,8 @@ internal class KotlinOrientContainerTest {
     @Test
     internal fun `should select beers`() {
 
-        db.query("select from beer limit 10").asSequence()
+        db.query("select from beer limit 10")
+                .asSequence()
                 .toList()
                 .apply {
                     assertThat(this).hasSize(10)

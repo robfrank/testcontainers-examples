@@ -8,7 +8,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import java.sql.DriverManager
 
 @Testcontainers
-class KotlinSimpleQuerySpec {
+class KotlinSimpleQueryTest {
 
     @Container
     private val container = PostgreSQLContainer<Nothing>()
