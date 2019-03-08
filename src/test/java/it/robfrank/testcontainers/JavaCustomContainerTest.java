@@ -75,7 +75,7 @@ public class JavaCustomContainerTest {
         db.command(new OCommandSQL("insert into Person set name='jane'")).execute();
 
         db.command(new OCommandSQL("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'rob') TO (SELECT FROM Person WHERE name = 'frank')set kind = 'fraternal' ")).execute();
-        db.command(new OCommandSQL("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'john') TO        (SELECT FROM Person WHERE name = 'jane')set kind = 'fraternal' ")).execute();
+        db.command(new OCommandSQL("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'john') TO (SELECT FROM Person WHERE name = 'jane')set kind = 'fraternal' ")).execute();
 
 
         db.close();

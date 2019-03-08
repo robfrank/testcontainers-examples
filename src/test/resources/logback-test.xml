@@ -9,6 +9,7 @@
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
+    <!-- debug: let's take a look what happens when starting a container-->
     <logger name="org.testcontainers" level="DEBUG"/>
     <logger name="org.apache.http" level="WARN"/>
     <logger name="com.github.dockerjava" level="WARN"/>
@@ -16,7 +17,7 @@
     <logger name="io.netty" level="WARN"/>
     <logger name="org.testcontainers.shaded" level="WARN"/>
     <!--<turboFilter class="ch.qos.logback.classic.turbo.MarkerFilter">-->
-        <!--<Marker>PROFILER</Marker>-->
-        <!--<OnMatch>DENY</OnMatch>-->
+    <!--<Marker>PROFILER</Marker>-->
+    <!--<OnMatch>DENY</OnMatch>-->
     <!--</turboFilter>-->
 </configuration>
