@@ -7,8 +7,11 @@ Code samples to support my talk "Integration testing: Testcontainers to the resc
 
 # Structure
 
-Even if Testcontainers is targeted to JUnit4, all the code presented here are using Junit5.
+All the code presented here uses Junit5.
 
 Tests are written in Java and Kotlin too.
+
+In src/main/docker there are a couple of custom images used in tests
+
 
 
