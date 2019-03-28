@@ -13,7 +13,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Paths
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 
 @Testcontainers
 class KotlinFromDockerFileTest {

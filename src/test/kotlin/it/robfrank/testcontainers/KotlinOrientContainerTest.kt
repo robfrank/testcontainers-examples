@@ -8,13 +8,13 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
+import org.testcontainers.junit.jupiter.Container
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class KotlinOrientContainerTest {
 
+    @Container
     private val container: GenericContainer<Nothing> = GenericContainer<Nothing>("robfrank/orientdb")
             .apply {
                 withExposedPorts(2424, 2480)
