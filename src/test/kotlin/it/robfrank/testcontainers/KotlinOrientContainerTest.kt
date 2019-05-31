@@ -4,6 +4,7 @@ import com.orientechnologies.orient.core.db.ODatabaseSession
 import com.orientechnologies.orient.core.db.OrientDB
 import com.orientechnologies.orient.core.db.OrientDBConfig
 import com.orientechnologies.orient.core.record.ODirection
+import com.orientechnologies.orient.core.record.OVertex
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -28,7 +29,7 @@ internal class KotlinOrientContainerTest {
     @BeforeEach
     internal fun setUp() {
         db = OrientDB("remote:${container.containerIpAddress}:${container.firstMappedPort}", OrientDBConfig.defaultConfig())
-                .open("OpenBeer", "admin", "admin")
+                .open("openbeer", "admin", "admin")
 
     }
 
@@ -39,20 +40,21 @@ internal class KotlinOrientContainerTest {
 
 
     @Test
-    internal fun `should select beers`() {
+    internal fun `should select beers vertexes`() {
 
         db.query("select from beer limit 10")
                 .asSequence()
                 .toList()
                 .apply {
                     assertThat(this).hasSize(10)
-                }.map {
-                    assertThat(it.isVertex).isTrue()
-                    assertThat(it.hasProperty("name")).isTrue()
-                    assertThat(it.hasProperty("descript")).isTrue()
-                    it.vertex.get()
-                }.forEach {
-                    assertThat(it.getEdges(ODirection.OUT)).isNotEmpty
+                }.map { result ->
+                    assertThat(result.isVertex).isTrue()
+                    assertThat(result.hasProperty("name")).isTrue()
+                    assertThat(result.hasProperty("descript")).isTrue()
+                    //map
+                    result.vertex.get()
+                }.forEach { vertex: OVertex ->
+                    assertThat(vertex.getEdges(ODirection.OUT)).isNotEmpty
                 }
 
 

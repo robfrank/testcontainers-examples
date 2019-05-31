@@ -23,15 +23,23 @@ internal class KotlinPostgresDvdRentalTest {
     internal fun `should query movies`() {
         container.withDatabaseName("dvdrental")
 
-        val connection = DriverManager.getConnection(container.jdbcUrl, container.username, container.password)
+        DriverManager.getConnection(container.jdbcUrl, container.username, container.password).use { conn ->
 
-        val statement = connection.createStatement()
+            conn.createStatement().use { stmt ->
 
-        val resultSet = statement.executeQuery("SELECT count(*) AS movies from Film")
+                stmt.executeQuery("SELECT count(*) AS movies from Film").use { resultSet ->
 
-        resultSet.next()
+                    resultSet.next()
 
-        Assertions.assertThat(resultSet.getInt("movies")).isEqualTo(1000)
+                    Assertions.assertThat(resultSet.getInt("movies")).isEqualTo(1000)
+
+                }
+
+
+            }
+
+        }
+
 
     }
 }

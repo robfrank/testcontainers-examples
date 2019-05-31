@@ -17,14 +17,18 @@ class KotlinSimpleQueryTest {
     @Test
     fun `should perform simple query`() {
 
-        val conn = DriverManager.getConnection(container.jdbcUrl, container.username, container.password)
-        val stmt = conn.createStatement()
-        stmt.execute("SELECT 1")
+        DriverManager.getConnection(container.jdbcUrl, container.username, container.password).use { conn ->
 
-        val resultSet = stmt.resultSet
-        resultSet.next()
+            conn.createStatement().use { stmt ->
 
-        assertThat(resultSet.getInt(1)).isEqualTo(1)
+                stmt.executeQuery("SELECT 1").use { resultSet ->
+
+                    resultSet.next()
+
+                    assertThat(resultSet.getInt(1)).isEqualTo(1)
+                }
+            }
+        }
     }
 
 
