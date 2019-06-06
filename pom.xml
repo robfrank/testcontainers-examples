@@ -28,7 +28,7 @@
         <selenium-remote-driver.version>3.141.59</selenium-remote-driver.version>
         <orientdb-client.version>3.0.19</orientdb-client.version>
 
-        <commons-csv.version>1.6</commons-csv.version>
+        <commons-csv.version>1.7</commons-csv.version>
         <commons-lang3.version>3.9</commons-lang3.version>
 
         <commons-text.version>1.6</commons-text.version>
