@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build . -t robfrank/postgres-dvdrental
+docker build . --pull -t robfrank/postgres-dvdrental
