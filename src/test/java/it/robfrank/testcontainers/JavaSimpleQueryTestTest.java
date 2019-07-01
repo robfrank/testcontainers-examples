@@ -18,7 +18,7 @@ public class JavaSimpleQueryTestTest {
 
     @Container
     public static PostgreSQLContainer container =
-            new PostgreSQLContainer("postgres:9.6.9");
+            new PostgreSQLContainer("postgres:11");
 
 
     @Test

@@ -16,7 +16,7 @@ public class JavaJdbcUrlWithScriptTest {
     @Test
     public void shouldSelectFromBar() throws SQLException {
 
-        String jdbcUrl = "jdbc:tc:postgresql:9.6.8://hostname/databasename?&TC_INITSCRIPT=initdb.sql";
+        String jdbcUrl = "jdbc:tc:postgresql:11://hostname/databasename?&TC_INITSCRIPT=initdb.sql";
 
         Connection conn = DriverManager.getConnection(jdbcUrl);
 

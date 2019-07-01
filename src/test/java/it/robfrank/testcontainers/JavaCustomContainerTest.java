@@ -1,12 +1,16 @@
 package it.robfrank.testcontainers;
 
-import com.orientechnologies.orient.client.remote.OServerAdmin;
-import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
-import com.orientechnologies.orient.core.sql.OCommandSQL;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
+import com.orientechnologies.orient.core.db.ODatabaseSession;
+import com.orientechnologies.orient.core.db.ODatabaseType;
+import com.orientechnologies.orient.core.db.OrientDB;
+import com.orientechnologies.orient.core.db.OrientDBConfig;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
@@ -20,6 +24,8 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JavaCustomContainerTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JavaCustomContainerTest.class);
@@ -38,44 +44,46 @@ public class JavaCustomContainerTest {
 
         String serverUrl = "remote:" + container.getContainerIpAddress() + ":" + container.getMappedPort(2424);
 
+        //one db per test!
         final String testName = info.getTestMethod().get().getName();
-        final String databaseUrl = createDatabase(serverUrl, testName);
+
+        final ODatabaseSession databaseUrl = createDatabase(serverUrl, testName);
         populateDatabase(databaseUrl);
     }
 
-    private String createDatabase(String serverUrl, String dbname) throws IOException {
+    private ODatabaseSession createDatabase(String serverUrl, String dbname) throws IOException {
 
-        OServerAdmin serverAdmin = new OServerAdmin(serverUrl);
-        serverAdmin.connect("root", "rootpassword");
-        serverAdmin.createDatabase(dbname, "graph", "plocal");
-        serverAdmin.close();
 
-        return serverUrl + "/" + dbname;
+        OrientDB orientDB = new OrientDB(serverUrl, "root", "rootpassword", OrientDBConfig.defaultConfig());
+
+        if (orientDB.exists(dbname))
+            orientDB.drop(dbname);
+
+        orientDB.create(dbname, ODatabaseType.PLOCAL);
+
+        return orientDB.open(dbname, "admin", "admin");
 
 
     }
 
 
-    private void populateDatabase(String database) {
+    private void populateDatabase(ODatabaseSession db) {
 
-        ODatabaseDocumentTx db = new ODatabaseDocumentTx(database);
 
-        db.open("admin", "admin");
+        db.command("create class Person extends V");
+        db.command("create property Person.name string");
+        db.command("create index Person.name on Person(name) unique");
 
-        db.command(new OCommandSQL("create class Person extends V")).execute();
-        db.command(new OCommandSQL("create property Person.name string")).execute();
-        db.command(new OCommandSQL("create index Person.name on Person(name) unique")).execute();
+        db.command("create class FriendOf extends E");
+        db.command("create property FriendOf.kind string");
 
-        db.command(new OCommandSQL("create class FriendOf extends E")).execute();
-        db.command(new OCommandSQL("create property FriendOf.kind string")).execute();
+        db.command("insert into Person set name='rob'");
+        db.command("insert into Person set name='frank'");
+        db.command("insert into Person set name='john'");
+        db.command("insert into Person set name='jane'");
 
-        db.command(new OCommandSQL("insert into Person set name='rob'")).execute();
-        db.command(new OCommandSQL("insert into Person set name='frank'")).execute();
-        db.command(new OCommandSQL("insert into Person set name='john'")).execute();
-        db.command(new OCommandSQL("insert into Person set name='jane'")).execute();
-
-        db.command(new OCommandSQL("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'rob') TO (SELECT FROM Person WHERE name = 'frank')set kind = 'fraternal' ")).execute();
-        db.command(new OCommandSQL("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'john') TO (SELECT FROM Person WHERE name = 'jane')set kind = 'fraternal' ")).execute();
+        db.command("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'rob') TO (SELECT FROM Person WHERE name = 'frank')set kind = 'fraternal' ");
+        db.command("CREATE EDGE FriendOf FROM (SELECT FROM Person WHERE name = 'john') TO (SELECT FROM Person WHERE name = 'jane')set kind = 'fraternal' ");
 
 
         db.close();
@@ -83,17 +91,46 @@ public class JavaCustomContainerTest {
     }
 
     @Test
-    public void shouldQuery(TestInfo info) {
+    @Order(1)
+    public void shouldCountPersons(TestInfo info) {
         final String testName = info.getTestMethod().get().getName();
 
-        System.out.println("info = " + testName);
-        String dbUrl = "remote:" + container.getContainerIpAddress() + ":" + container.getMappedPort(2424) + "/" + testName;
-        ODatabaseDocumentTx db = new ODatabaseDocumentTx(dbUrl);
+        String dbUrl = "remote:" + container.getContainerIpAddress() + ":" + container.getMappedPort(2424);
 
-        db.open("admin", "admin");
+        OrientDB orientDB = new OrientDB(dbUrl, OrientDBConfig.defaultConfig());
 
-        final int person = db.query(new OSQLSynchQuery<>("SELECT FROM Person")).size();
+        final ODatabaseSession db = orientDB.open(testName, "admin", "admin");
 
-        assertThat(person).isEqualTo(4);
+        final long persons = db.query("SELECT FROM Person").stream().count();
+
+        assertThat(persons).isEqualTo(4);
+    }
+
+    @Test
+    @Order(2)
+    public void shouldCountPersonsOnAnotherdb(TestInfo info) {
+        final String testName = info.getTestMethod().get().getName();
+
+        String dbUrl = "remote:" + container.getContainerIpAddress() + ":" + container.getMappedPort(2424);
+
+        OrientDB orientDB = new OrientDB(dbUrl, OrientDBConfig.defaultConfig());
+
+        final ODatabaseSession db = orientDB.open(testName, "admin", "admin");
+
+        final long persons = db.query("SELECT FROM Person").stream().count();
+
+        assertThat(persons).isEqualTo(4);
+    }
+
+
+    @Test
+    @Order(3)
+    void shouldHaveThreeTestDatabases() {
+        String dbUrl = "remote:" + container.getContainerIpAddress() + ":" + container.getMappedPort(2424);
+
+        OrientDB orientDB = new OrientDB(dbUrl, "root", "rootpassword", OrientDBConfig.defaultConfig());
+
+        assertThat(orientDB.list()).hasSize(4);
+
     }
 }

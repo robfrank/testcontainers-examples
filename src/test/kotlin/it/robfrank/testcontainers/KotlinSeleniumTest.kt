@@ -14,12 +14,12 @@ import java.io.File
 class KotlinSeleniumTest {
 
     @Container
-    private val chrome: BrowserWebDriverContainer<Nothing> = BrowserWebDriverContainer<Nothing>().apply {
-        withDesiredCapabilities(DesiredCapabilities.chrome())
-        withRecordingMode(RECORD_ALL, File("target"))
-
-        start()
-    }
+    private val chrome: BrowserWebDriverContainer<Nothing> = BrowserWebDriverContainer<Nothing>()
+            .apply {
+                withDesiredCapabilities(DesiredCapabilities.chrome())
+                withRecordingMode(RECORD_ALL, File("target"))
+                start()
+            }
 
     @Test
     fun simplePlainSeleniumTest() {

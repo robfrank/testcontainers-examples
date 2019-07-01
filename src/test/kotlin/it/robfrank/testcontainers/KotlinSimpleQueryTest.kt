@@ -11,7 +11,7 @@ import java.sql.DriverManager
 class KotlinSimpleQueryTest {
 
     @Container
-    private val container = PostgreSQLContainer<Nothing>()
+    private val container = PostgreSQLContainer<Nothing>("postgres:11")
 
 
     @Test

@@ -1,4 +1,4 @@
-FROM postgres:9
+FROM postgres:10
 
 
 COPY ./dump/dvdrental.tar /tmp/dvdrental.tar
