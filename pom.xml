@@ -23,7 +23,7 @@
         <assertj-core.version>3.12.2</assertj-core.version>
         <assertj-guava.version>3.2.1</assertj-guava.version>
 
-        <testcontainers.version>1.11.3</testcontainers.version>
+        <testcontainers.version>1.11.4</testcontainers.version>
         <postgresql.version>42.2.6</postgresql.version>
         <selenium-remote-driver.version>3.141.59</selenium-remote-driver.version>
         <orientdb-client.version>3.0.21</orientdb-client.version>
