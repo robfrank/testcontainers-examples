@@ -21,7 +21,8 @@ class KotlinFromDockerFileTest {
 
     @Container
     private val container: GenericContainer<Nothing> = GenericContainer<Nothing>(
-            ImageFromDockerfile("robfrank/ngnix").withFileFromPath("Dockerfile", Paths.get("./src/main/docker/nginx/Dockerfile"))
+            ImageFromDockerfile("robfrank/ngnix")
+                    .withFileFromPath("Dockerfile", Paths.get("./src/main/docker/nginx/Dockerfile"))
     ).apply {
         withExposedPorts(80)
         waitingFor(Wait.forListeningPort())
