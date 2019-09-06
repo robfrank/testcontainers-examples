@@ -7,7 +7,6 @@
 
 Code samples to support my talk "Integration testing: Testcontainers to the rescue"
 
-
 # Structure
 
 All the code presented here uses Junit5.
