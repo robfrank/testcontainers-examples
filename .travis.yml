@@ -11,5 +11,4 @@ before_install:
   - cd ./src/main/docker/postgresql-dvdrental && ./build.sh && cd -
 
 jdk:
-  - openjdk8
-  - openjdk12
+  - openjdk9
