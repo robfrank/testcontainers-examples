@@ -5,7 +5,9 @@
 
 # Testcontainer examples
 
-Code samples to support my talk "Integration testing: Testcontainers to the rescue"
+Code samples to support my talk "Integration testing: use the containers Luke!"
+
+https://www.slideshare.net/robfrankie/integration-tests-use-the-containers-luke
 
 # Structure
 
@@ -14,6 +16,7 @@ All the code presented here uses Junit5.
 Tests are written in Java and Kotlin too.
 
 In src/main/docker there are a couple of custom images used in tests
+
 
 
 
