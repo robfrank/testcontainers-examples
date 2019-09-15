@@ -8,6 +8,12 @@ import org.testcontainers.junit.jupiter.Testcontainers
 import java.sql.DriverManager
 
 
+/**
+ * Test that show hoe to use a custom container with preloaded database
+ *
+ * Script to create image is in src/main/docker/postgres-dvdrental
+ *
+ */
 @Testcontainers
 internal class KotlinPostgresDvdRentalTest {
 

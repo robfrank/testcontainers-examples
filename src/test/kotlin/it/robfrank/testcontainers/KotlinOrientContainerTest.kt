@@ -14,6 +14,11 @@ import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
 
+
+/**
+ * Test that shows the use of a GenericContainer using a custom image
+ *
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class KotlinOrientContainerTest {
 

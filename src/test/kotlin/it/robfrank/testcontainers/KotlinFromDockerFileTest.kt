@@ -13,7 +13,10 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Paths
 
-
+/**
+ * Example test that show how to use a container based on a custom Dockerfile
+ *
+ */
 @Testcontainers
 class KotlinFromDockerFileTest {
 
