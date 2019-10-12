@@ -17,6 +17,8 @@ class KotlinSimpleQueryTest {
     @Test
     fun `should perform simple query`() {
 
+        container.start()
+
         DriverManager.getConnection(container.jdbcUrl, container.username, container.password).use { conn ->
 
             conn.createStatement().use { stmt ->
