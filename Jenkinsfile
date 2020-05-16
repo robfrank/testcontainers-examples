@@ -25,7 +25,7 @@ node {
     stage('build') {
         try {
             ansiColor('xterm') {
-                sh "./mvnw clean install -fae"
+                sh "./mvnw verify  -fae"
             }
         } catch (err) {
             throw err
