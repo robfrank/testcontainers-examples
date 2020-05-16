@@ -11,22 +11,22 @@ import java.sql.Statement;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JavaJdbcUrlWithScriptTest {
-
-
+    
+    
     @Test
     public void shouldSelectFromBar() throws SQLException {
-
-        String jdbcUrl = "jdbc:tc:postgresql:11://hostname/databasename?&TC_INITSCRIPT=initdb.sql";
-
-        Connection conn = DriverManager.getConnection(jdbcUrl);
-
-        Statement stmt = conn.createStatement();
+        
+        var jdbcUrl = "jdbc:tc:postgresql:11://hostname/databasename?&TC_INITSCRIPT=initdb.sql";
+        
+        var conn = DriverManager.getConnection(jdbcUrl);
+        
+        var stmt = conn.createStatement();
         stmt.execute("SELECT * FROM bar");
-
-        ResultSet resultSet = stmt.getResultSet();
+        
+        var resultSet = stmt.getResultSet();
         resultSet.next();
-
+        
         assertThat(resultSet.getString("foo")).isEqualTo("hello world");
-
+        
     }
 }

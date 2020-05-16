@@ -15,25 +15,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
 public class JavaSimpleQueryTestTest {
-
+    
     @Container
-    public static PostgreSQLContainer container =
-            new PostgreSQLContainer("postgres:11");
-
-
+    public static PostgreSQLContainer container = new PostgreSQLContainer("postgres:11");
+    
+    
     @Test
     public void shouldTestSimpleQuery() throws SQLException {
-
-        Connection conn = DriverManager.getConnection(container.getJdbcUrl(),
+        
+        var conn = DriverManager.getConnection(container.getJdbcUrl(),
                 container.getUsername(),
                 container.getPassword());
-
-        Statement stmt = conn.createStatement();
+        
+        var stmt = conn.createStatement();
         stmt.execute("SELECT 1");
-
-        ResultSet resultSet = stmt.getResultSet();
+        
+        var resultSet = stmt.getResultSet();
         resultSet.next();
-
+        
         assertThat(resultSet.getInt(1)).isEqualTo(1);
     }
 }

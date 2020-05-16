@@ -11,23 +11,21 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.containers.GenericContainer
+import org.testcontainers.containers.OrientDBContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
 
 /**
- * Test that shows the use of a GenericContainer using a custom image
- *
+ * Test showing the use of a single instance for class of a container
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class KotlinOrientContainerTest {
 
-    @Container
-    private val container: GenericContainer<Nothing> = GenericContainer<Nothing>("robfrank/orientdb")
+    private val container = OrientDBContainer("robfrank/orientdb")
             .apply {
-                withExposedPorts(2424, 2480)
-                withEnv("ORIENTDB_ROOT_PASSWORD", "rootpassword")
-                waitingFor(Wait.forListeningPort())
+                withDatabaseName("openbeer")
                 start()
             }
 
@@ -35,17 +33,8 @@ internal class KotlinOrientContainerTest {
 
     @BeforeEach
     internal fun setUp() {
-
-        db = OrientDB("remote:${container.containerIpAddress}:${container.firstMappedPort}", OrientDBConfig.defaultConfig())
-                .open("openbeer", "admin", "admin")
-
+        db = container.session
     }
-
-    @AfterEach
-    internal fun tearDown() {
-        db.close()
-    }
-
 
     @Test
     internal fun `should select beers vertexes`() {

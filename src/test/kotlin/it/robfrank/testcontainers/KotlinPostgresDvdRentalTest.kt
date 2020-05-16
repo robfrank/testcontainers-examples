@@ -41,11 +41,9 @@ internal class KotlinPostgresDvdRentalTest {
 
                 }
 
-
             }
 
         }
-
 
     }
 }

@@ -60,7 +60,8 @@
                 class="com.orientechnologies.orient.server.handler.OServerSideScriptInterpreter">
             <parameters>
                 <parameter name="enabled" value="true"/>
-                <parameter name="allowedLanguages" value="SQL"/>
+                <!-- ADD GREMLIN  -->
+                <parameter name="allowedLanguages" value="SQL,GREMLIN"/>
             </parameters>
         </handler>
         <!-- CUSTOM SQL FUNCTIONS -->
