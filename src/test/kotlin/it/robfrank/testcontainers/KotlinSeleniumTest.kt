@@ -6,11 +6,13 @@ import org.openqa.selenium.remote.DesiredCapabilities
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL
 import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
 
 /**
  * Simple example of plain Selenium usage.
  */
+@Testcontainers
 class KotlinSeleniumTest {
 
     @Container
