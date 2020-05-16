@@ -22,5 +22,10 @@ jobs:
         with:
           java-version: 14
 
+      - name: Build support Docker images
+        run: |
+          cd ./src/main/docker/orientdb && ./build.sh && cd -
+          cd ./src/main/docker/postgresql-dvdrental && ./build.sh && cd -
+
       - name: Build with Maven
         run: mvn verify --file pom.xml
