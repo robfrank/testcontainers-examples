@@ -17,6 +17,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Lint Code Base
+          uses: docker://github/super-linter:v2.2.0
+          env:
+            VALIDATE_ALL_CODEBASE: true
+
       - name: Set up JDK 14
         uses: actions/setup-java@v1
         with:
