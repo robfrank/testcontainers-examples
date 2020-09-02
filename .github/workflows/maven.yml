@@ -34,4 +34,4 @@ jobs:
           cd ./src/main/docker/postgresql-dvdrental && ./build.sh && cd -
 
       - name: Build with Maven
-        run: mvn verify --file pom.xml
+        run: mvn verify --quiet --file pom.xml
