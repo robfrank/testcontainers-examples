@@ -17,11 +17,11 @@ class KotlinSeleniumTest {
 
     @Container
     private val chrome: BrowserWebDriverContainer<Nothing> = BrowserWebDriverContainer<Nothing>()
-            .apply {
-                withDesiredCapabilities(DesiredCapabilities.chrome())
-                withRecordingMode(RECORD_ALL, File("target"))
-                start()
-            }
+        .apply {
+            withCapabilities(DesiredCapabilities.chrome())
+            withRecordingMode(RECORD_ALL, File("target"))
+            start()
+        }
 
     @Test
     fun simplePlainSeleniumTest() {
@@ -37,11 +37,11 @@ class KotlinSeleniumTest {
         otherPage.click()
 
         val expectedTextFound = driver.findElementsByCssSelector("p")
-                .asSequence()
-                .any { element -> "meme" in element.text }
+            .asSequence()
+            .any { element -> "meme" in element.text }
 
         assertThat(expectedTextFound)
-                .`as`("The word 'meme' is found on a page about rickrolling")
-                .isTrue()
+            .`as`("The word 'meme' is found on a page about rickrolling")
+            .isTrue()
     }
 }

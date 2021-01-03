@@ -15,6 +15,7 @@ import org.testcontainers.containers.OrientDBContainer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import org.testcontainers.utility.DockerImageName
 
 
 /**
@@ -23,11 +24,11 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class KotlinOrientContainerTest {
 
-    private val container = OrientDBContainer("robfrank/orientdb")
-            .apply {
-                withDatabaseName("openbeer")
-                start()
-            }
+    private val container = OrientDBContainer( DockerImageName.parse("robfrank/orientdb").asCompatibleSubstituteFor("orientdb"))
+        .apply {
+            withDatabaseName("openbeer")
+            start()
+        }
 
     private lateinit var db: ODatabaseSession
 
@@ -40,42 +41,42 @@ internal class KotlinOrientContainerTest {
     internal fun `should select beers vertexes`() {
 
         db.query("select from Beer limit 10")
-                .use { set ->
-                    set.asSequence()
-                            .toList()
-                            .apply {
-                                assertThat(this).hasSize(10)
-                            }.map { result ->
-                                assertThat(result.isVertex).isTrue()
-                                assertThat(result.hasProperty("name")).isTrue()
-                                assertThat(result.hasProperty("descript")).isTrue()
-                                //map
-                                result.vertex.get()
-                            }.forEach { vertex: OVertex ->
-                                assertThat(vertex.getEdges(ODirection.OUT)).isNotEmpty
-                            }
+            .use { set ->
+                set.asSequence()
+                    .toList()
+                    .apply {
+                        assertThat(this).hasSize(10)
+                    }.map { result ->
+                        assertThat(result.isVertex).isTrue()
+                        assertThat(result.hasProperty("name")).isTrue()
+                        assertThat(result.hasProperty("descript")).isTrue()
+                        //map
+                        result.vertex.get()
+                    }.forEach { vertex: OVertex ->
+                        assertThat(vertex.getEdges(ODirection.OUT)).isNotEmpty
+                    }
 
 
-                }
+            }
     }
 
     @Test
     internal fun `should select breweries`() {
 
         db.query("select from Brewery limit 10")
-                .use { set ->
-                    set.asSequence()
-                            .toList()
-                            .apply {
-                                assertThat(this).hasSize(10)
-                            }.map { result ->
-                                assertThat(result.isVertex).isTrue()
-                                assertThat(result.hasProperty("name")).isTrue()
-                                assertThat(result.hasProperty("descript")).isTrue()
-                                //map
-                                result.vertex.get()
-                            }
+            .use { set ->
+                set.asSequence()
+                    .toList()
+                    .apply {
+                        assertThat(this).hasSize(10)
+                    }.map { result ->
+                        assertThat(result.isVertex).isTrue()
+                        assertThat(result.hasProperty("name")).isTrue()
+                        assertThat(result.hasProperty("descript")).isTrue()
+                        //map
+                        result.vertex.get()
+                    }
 
-                }
+            }
     }
 }

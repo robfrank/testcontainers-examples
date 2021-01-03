@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import org.testcontainers.utility.DockerImageName
 import java.sql.DriverManager
 
 
@@ -19,31 +20,32 @@ internal class KotlinPostgresDvdRentalTest {
 
 
     @Container
-    val container = PostgreSQLContainer<Nothing>("robfrank/postgres-dvdrental")
-            .apply {
-                withUsername("postgres")
-                withPassword("postgres")
-            }
+    val container = PostgreSQLContainer<Nothing>(DockerImageName.parse("robfrank/postgres-dvdrental").asCompatibleSubstituteFor("postgres"))
+        .apply {
+            withUsername("postgres")
+            withPassword("postgres")
+        }
 
     @Test
     internal fun `should query movies`() {
         container.withDatabaseName("dvdrental")
 
-        DriverManager.getConnection(container.jdbcUrl, container.username, container.password).use { conn ->
+        DriverManager.getConnection(container.jdbcUrl, container.username, container.password)
+            .use { conn ->
 
-            conn.createStatement().use { stmt ->
+                conn.createStatement().use { stmt ->
 
-                stmt.executeQuery("SELECT count(*) AS movies from Film").use { resultSet ->
+                    stmt.executeQuery("SELECT count(*) AS movies from Film").use { resultSet ->
 
-                    resultSet.next()
+                        resultSet.next()
 
-                    Assertions.assertThat(resultSet.getInt("movies")).isEqualTo(1000)
+                        Assertions.assertThat(resultSet.getInt("movies")).isEqualTo(1000)
+
+                    }
 
                 }
 
             }
-
-        }
 
     }
 }

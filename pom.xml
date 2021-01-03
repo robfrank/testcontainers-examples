@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2018 - Arcade Analytics LTD (https://arcadeanalytics.com)
-  -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -15,9 +11,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>14</maven.compiler.source>
-    <maven.compiler.target>14</maven.compiler.target>
-    <maven.compiler.release>14</maven.compiler.release>
+    <maven.compiler.source>15</maven.compiler.source>
+    <maven.compiler.target>15</maven.compiler.target>
+    <maven.compiler.release>15</maven.compiler.release>
 
     <kotlin.version>1.4.21-2</kotlin.version>
     <junit.jupiter.version>5.7.0</junit.jupiter.version>
@@ -80,7 +76,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <release>14</release>
+          <release>${maven.compiler.source}</release>
           <compilerArgs>--enable-preview</compilerArgs>
         </configuration>
         <executions>

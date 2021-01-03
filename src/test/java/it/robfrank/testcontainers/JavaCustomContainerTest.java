@@ -21,6 +21,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.io.IOException;
+import org.testcontainers.utility.DockerImageName;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,7 +33,7 @@ public class JavaCustomContainerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(JavaCustomContainerTest.class);
     
     @Container
-    public static OrientDBContainer container = new OrientDBContainer("robfrank/orientdb");
+    public static OrientDBContainer container = new OrientDBContainer(DockerImageName.parse("robfrank/orientdb").asCompatibleSubstituteFor("orientdb"));
     
     @BeforeEach
     public void setUp(TestInfo info) throws Exception {
@@ -110,7 +111,7 @@ public class JavaCustomContainerTest {
     
     @Test
     @Order(2)
-    public void shouldCountPersonsOnAnotherdb(TestInfo info) {
+    public void shouldCountPersonsOnAnotherDb(TestInfo info) {
         var testName = info.getTestMethod().get().getName();
         
         var dbUrl = container.getServerUrl();
