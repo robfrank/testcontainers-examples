@@ -33,7 +33,7 @@
     <commons-io.version>2.10.0</commons-io.version>
     <guava.version>31.0.1-jre</guava.version>
     <logback-classic.version>1.2.10</logback-classic.version>
-    <slf4j-api.version>1.7.30</slf4j-api.version>
+    <slf4j-api.version>1.7.35</slf4j-api.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
   </properties>
