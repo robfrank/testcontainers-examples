@@ -22,7 +22,7 @@
 
     <testcontainers.version>1.16.3</testcontainers.version>
     <postgresql.version>42.3.1</postgresql.version>
-    <selenium-remote-driver.version>3.141.59</selenium-remote-driver.version>
+    <selenium-remote-driver.version>4.1.2</selenium-remote-driver.version>
     <orientdb-client.version>3.2.4</orientdb-client.version>
     <janusgraph.version>0.6.1</janusgraph.version>
 
