@@ -18,7 +18,7 @@
     <kotlin.version>1.6.10</kotlin.version>
     <junit.jupiter.version>5.8.2</junit.jupiter.version>
     <assertj-core.version>3.23.1</assertj-core.version>
-    <assertj-guava.version>3.4.0</assertj-guava.version>
+    <assertj-guava.version>3.24.0</assertj-guava.version>
 
     <testcontainers.version>1.17.3</testcontainers.version>
     <postgresql.version>42.3.1</postgresql.version>
