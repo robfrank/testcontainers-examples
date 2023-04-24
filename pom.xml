@@ -11,9 +11,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>15</maven.compiler.source>
-    <maven.compiler.target>15</maven.compiler.target>
-    <maven.compiler.release>15</maven.compiler.release>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.release>17</maven.compiler.release>
 
     <kotlin.version>1.6.10</kotlin.version>
     <junit.jupiter.version>5.8.2</junit.jupiter.version>
@@ -77,7 +77,6 @@
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <release>${maven.compiler.source}</release>
-          <compilerArgs>--enable-preview</compilerArgs>
         </configuration>
         <executions>
           <!-- Replacing default-compile as it is treated specially by maven -->
