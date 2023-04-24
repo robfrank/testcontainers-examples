@@ -35,7 +35,7 @@
     <logback-classic.version>1.4.1</logback-classic.version>
     <slf4j-api.version>2.0.7</slf4j-api.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
   </properties>
 
   <build>
