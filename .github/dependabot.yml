@@ -16,7 +16,19 @@ updates:
   open-pull-requests-limit: 10
 
 - package-ecosystem: docker
-  directory: "src/main/docker"
+  directory: "src/main/docker/orientdb"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+- package-ecosystem: docker
+  directory: "src/main/docker/postgresql-dvdrental"
+  schedule:
+    interval: weekly
+    time: '04:00'
+  open-pull-requests-limit: 10
+- package-ecosystem: docker
+  directory: "src/main/docker/nginx"
   schedule:
     interval: weekly
     time: '04:00'
