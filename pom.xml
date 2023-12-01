@@ -24,7 +24,7 @@
     <postgresql.version>42.6.0</postgresql.version>
     <selenium-remote-driver.version>4.14.1</selenium-remote-driver.version>
     <orientdb-client.version>3.2.23</orientdb-client.version>
-    <janusgraph.version>1.0.0-20231020-183655.ff58c43</janusgraph.version>
+    <janusgraph.version>1.1.0-20231130-164636.abdc113</janusgraph.version>
 
     <commons-csv.version>1.10.0</commons-csv.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
